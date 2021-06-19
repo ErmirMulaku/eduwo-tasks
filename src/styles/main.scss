@@ -1,0 +1,28 @@
+//====================== IMPORTANT NOTE: Do not change import order! =====================//
+
+// Reset styling.
+@import "reset";
+
+//Include lib. Override bootstrap and declare other variables.
+@import "lib";
+@import "variables";
+
+/*$theme-colors: (
+  "primary": $mainColor,
+);*/
+$enable-rounded: false;
+
+//Include bootstrap.
+@import "~bootstrap/dist/css/bootstrap.min.css";
+//Import other styles.
+
+body {
+  font-size: 16px;
+
+  overflow: hidden;
+}
+.App {
+  min-height: 100vh;
+  width: 100vw;
+  height: 100vh;
+}
