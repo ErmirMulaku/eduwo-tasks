@@ -1,0 +1,44 @@
+@import "src/styles/variables";
+.FlyOutMenu {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  position: absolute;
+  min-width: 220px;
+
+  top: 29px;
+  right: -30px;
+  &--open {
+    opacity: 1;
+  }
+
+  &__icon {
+    transform: translateX(136px);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+    margin-bottom: 4px;
+  }
+  &__content {
+    border: 1px solid white;
+    border-radius: 20px;
+    padding: 40px;
+    background-color: white;
+  }
+  &__image {
+    border-radius: 10px;
+  }
+  &__name {
+    font-size: 20px;
+    margin-top: 20px;
+    color: $second_header_linear_gradient_color;
+  }
+  &__description {
+    font-size: 14px;
+    margin: 15px 10px 0px 0px;
+    color: #4b4b4b;
+    font-weight: 400;
+    line-height: 21px;
+  }
+}
