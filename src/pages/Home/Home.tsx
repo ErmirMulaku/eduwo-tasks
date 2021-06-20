@@ -6,10 +6,13 @@ import CountryCard from "../../components/CountryCard/CountryCard";
 import SearchInput from "../../components/shared/SearchInput/SearchInput";
 import { ReactComponent as AscIcon } from "../../assets/icons/sort-asc.svg";
 import { ReactComponent as DescIcon } from "../../assets/icons/sort-desc.svg";
+import { HandleLoadingState } from "../../components/shared/HandleLoadingState/HandleLoadingState";
+import GridLoader from "../../components/shared/GridLoader/GridLoader";
+import Message from "../../components/shared/Message/Message";
 
-import "./Home.scss";
 import cs from "classnames";
-import Button from "../../components/shared/Button/Button";
+import "./Home.scss";
+import CountryCardLoader from "../../components/CountryCard/CountryCardLoader/CountryCardLoader";
 
 const Home = () => {
   const [isAscSortActive, setIsAscSortActive] = useState(false);
@@ -36,10 +39,37 @@ const Home = () => {
             <DescIcon className="Home__sort" />
           </div>
         </div>
-        <div className="Home__cards">
-          {countries.map((country) => (
-            <CountryCard key={country.NumericCode} country={country} />
-          ))}
+        <div className="Home__content">
+          <HandleLoadingState
+            /* loading={checkPageNumber(page, loading)}*/
+            component={
+              <GridLoader length={10} component={<CountryCardLoader />} />
+            }
+          >
+            {countries?.length === 0 ? (
+              <Message text="No data" type="info" />
+            ) : (
+              <div className="Home__cards">
+                {countries.map((country) => {
+                  return (
+                    <CountryCard key={country.CurrencyCode} country={country} />
+                  );
+                })}
+              </div>
+            )}
+          </HandleLoadingState>
+
+          {/* <Button
+            spinner={
+              <Spinner
+                color="info"
+                className={cs("spinner", !loading && "spinner--hidden")}
+              />
+            }
+            label="Load More"
+            buttonClassName={cs("load_btn", !hasMore && "load_btn--hidden")}
+            onClick={() => setPage((prevState) => prevState + 1)}
+          />*/}
         </div>
       </div>
     </Container>
