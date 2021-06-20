@@ -1,0 +1,41 @@
+@import "src/styles/variables";
+
+.CountryCard {
+  width: 250px;
+  height: 250px;
+  position: relative;
+  border-radius: 10px;
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+  &__fade_away {
+    position: absolute;
+    top: 60%;
+    left: 0px;
+    width: 100%;
+    height: 40%;
+    background: transparent;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.8) 20%,
+      rgba(255, 255, 255, 0.8) 100%
+    );
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  &__name {
+    color: $first_header_linear_gradient_color;
+    margin: 15px 10px;
+    font-weight: 700;
+  }
+  &__arrow {
+    color: $first_header_linear_gradient_color;
+    fill: $first_header_linear_gradient_color;
+    margin-right: 10px;
+    align-self: flex-end;
+  }
+}
