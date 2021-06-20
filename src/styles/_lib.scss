@@ -32,11 +32,7 @@ Mixin for including styles for mobile
     @content;
   }
 }
-
-/**
-Mixin for including styles for tablet
-*/
-@mixin tablet {
+@mixin mobile-landscape {
   @media (max-width: $mq-medium) {
     @content;
   }
@@ -44,6 +40,15 @@ Mixin for including styles for tablet
 
 /**
 Mixin for including styles for tablet
+*/
+@mixin tablet {
+  @media (max-width: $d-small) {
+    @content;
+  }
+}
+
+/**
+Mixin for including styles for medium desktop
 */
 @mixin desktop {
   @media (max-width: $d-medium) {

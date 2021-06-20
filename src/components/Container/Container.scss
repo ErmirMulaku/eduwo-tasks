@@ -1,0 +1,19 @@
+@import "src/styles/lib";
+.Container {
+  margin: 0 auto;
+  width: 100%;
+
+  max-width: 1400px;
+  @include large-desktop {
+    max-width: 1139px;
+  }
+  @include desktop {
+    max-width: 882px;
+  }
+  @include tablet {
+    max-width: 625px;
+  }
+  @include mobile-landscape {
+    max-width: 368px;
+  }
+}
