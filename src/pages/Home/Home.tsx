@@ -1,13 +1,13 @@
 import React, { useMemo } from "react";
 import "./Home.scss";
 import { useApiCall } from "../../lib/hooks/useApiCall";
-import { City, getCities } from "../../api/City";
+import { Country, getCountries } from "../../api/Country";
 
 const Home = () => {
-  const params = useMemo(() => ({ limit: 10, offset: 0 }), []);
-  const { data, loading, error } = useApiCall(getCities, [params]);
-  const cities = data?.data as unknown as City[];
-  console.log(data, "data", cities, "cities");
+  const params = useMemo(() => ({ pLimit: 5, pPage: 1 }), []);
+  const { data, loading, error } = useApiCall(getCountries, [params]);
+  const countries = data?.Response as unknown as Country[];
+  console.log(data, "data", countries, "countries");
   return <div className="Home"></div>;
 };
 
