@@ -14,15 +14,16 @@ import Button from "../../components/shared/Button/Button";
 import cs from "classnames";
 import "./Home.scss";
 import CountryCardLoader from "../../components/CountryCard/CountryCardLoader/CountryCardLoader";
+import useCountries from "../../lib/hooks/useCountries";
+import { checkPageNumber } from "../../lib/helpers/checkPageNumber";
 
 const Home = () => {
   const [isAscSortActive, setIsAscSortActive] = useState(false);
   const [isDescSortActive, setIsDescSortActive] = useState(false);
 
-  const params = useMemo(() => ({ pLimit: 10, pPage: 1 }), []);
-  const { data, loading, error } = useApiCall(getCountries, [params]);
-  const countries = data?.Response ?? ([] as Country[]);
-  console.log(data, "data", countries, "countries");
+  const { countries, loading, error, setPage, page } = useCountries();
+
+  console.log(countries, "countries");
   return (
     <Container>
       <div className="Home">
@@ -42,7 +43,7 @@ const Home = () => {
         </div>
         <div className="Home__content">
           <HandleLoadingState
-            loading={loading}
+            loading={checkPageNumber(page, loading)}
             component={
               <GridLoader length={10} component={<CountryCardLoader />} />
             }
@@ -63,7 +64,7 @@ const Home = () => {
           <Button
             label={!loading ? "Load More" : "Loading..."}
             buttonClassName={cs("load_btn")}
-            /*onClick={() => setPage((prevState) => prevState + 1)}*/
+            onClick={() => setPage((prevState) => prevState + 1)}
           />
         </div>
       </div>
