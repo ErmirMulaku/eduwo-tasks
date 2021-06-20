@@ -1,8 +1,7 @@
 @import "src/styles/lib";
 @import "src/styles/variables";
 .Home {
-  width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: white;
   padding: 33.65px 67px;
   &__top {
@@ -25,8 +24,13 @@
   &__asc--active {
     border-bottom: 1px solid $first_header_linear_gradient_color;
   }
+  &__content {
+    width: 100%;
+    margin-top: 25px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
   &__cards {
-    margin-top: 20px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-auto-rows: auto;

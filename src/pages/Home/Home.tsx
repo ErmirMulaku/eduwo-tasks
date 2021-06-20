@@ -41,12 +41,12 @@ const Home = () => {
         </div>
         <div className="Home__content">
           <HandleLoadingState
-            /* loading={checkPageNumber(page, loading)}*/
+            loading={loading}
             component={
               <GridLoader length={10} component={<CountryCardLoader />} />
             }
           >
-            {countries?.length === 0 ? (
+            {countries.length === 0 ? (
               <Message text="No data" type="info" />
             ) : (
               <div className="Home__cards">
