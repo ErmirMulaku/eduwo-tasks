@@ -17,14 +17,13 @@
   }
   &__sort {
     fill: $first_header_linear_gradient_color;
+    cursor: pointer;
   }
   &__asc {
     margin-right: 10px;
-    cursor: pointer;
-
-    &:hover {
-      fill: $first_header_linear_gradient_color;
-    }
+  }
+  &__asc--active {
+    border-bottom: 1px solid $first_header_linear_gradient_color;
   }
   &__cards {
     margin-top: 20px;
