@@ -9,6 +9,7 @@ import { ReactComponent as DescIcon } from "../../assets/icons/sort-desc.svg";
 import { HandleLoadingState } from "../../components/shared/HandleLoadingState/HandleLoadingState";
 import GridLoader from "../../components/shared/GridLoader/GridLoader";
 import Message from "../../components/shared/Message/Message";
+import Button from "../../components/shared/Button/Button";
 
 import cs from "classnames";
 import "./Home.scss";
@@ -59,17 +60,11 @@ const Home = () => {
             )}
           </HandleLoadingState>
 
-          {/* <Button
-            spinner={
-              <Spinner
-                color="info"
-                className={cs("spinner", !loading && "spinner--hidden")}
-              />
-            }
-            label="Load More"
-            buttonClassName={cs("load_btn", !hasMore && "load_btn--hidden")}
-            onClick={() => setPage((prevState) => prevState + 1)}
-          />*/}
+          <Button
+            label={!loading ? "Load More" : "Loading..."}
+            buttonClassName={cs("load_btn")}
+            /*onClick={() => setPage((prevState) => prevState + 1)}*/
+          />
         </div>
       </div>
     </Container>

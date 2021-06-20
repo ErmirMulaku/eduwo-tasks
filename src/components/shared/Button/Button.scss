@@ -1,0 +1,10 @@
+.Button {
+  &__text {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  /*  &:disabled {
+    background-color: rgb(128, 128, 128);
+  }*/
+}
