@@ -20,18 +20,19 @@ export interface Country {
 }
 
 export interface GetCountriesInput {
-  pLimit: number;
-  pPage: number;
+  pRegion?: string;
+  pName?: string;
 }
-export interface GetCountriesResponse {
+export type GetCountriesResponse = {
   isSuccess: boolean;
   UserMessage: null | string;
   TechnicalMessage: string | null;
   TotalCount: number;
   Response: Array<Country>;
-}
-export const getCountries = async () =>
+};
+
+export const getCountries = async (data: GetCountriesInput) =>
   apiRequest<undefined, GetCountriesResponse>(
     "get",
-    `v1/Country/getCountries?pRegion=Europe`
+    `v1/Country/getCountries?${objectToQueryString({ ...data })}`
   );

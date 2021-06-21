@@ -21,7 +21,7 @@ export const useCountries = () => {
   };
   const getData = async () => {
     try {
-      const res = await getCountries();
+      const res = await getCountries({ pRegion: "Europe" });
       const countries = res?.Response ?? [];
       setCountries(countries);
     } catch (e) {

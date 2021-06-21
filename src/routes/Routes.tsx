@@ -17,7 +17,7 @@ export const AppRoutes: AppRoute[] = [
     component: Home,
   },
   {
-    path: "/details/:id",
+    path: "/details/:name",
     exact: true,
     component: CountryDetails,
   },

@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
-import { Country } from "../../api/Country";
+import React from "react";
+import ReactPaginate from "react-paginate";
+import { useCountries } from "../../lib/hooks/useCountries";
 import Container from "../../components/Container/Container";
 import CountryCard from "../../components/CountryCard/CountryCard";
 import SearchInput from "../../components/shared/SearchInput/SearchInput";
-import { ReactComponent as AscIcon } from "../../assets/icons/sort-asc.svg";
-import { ReactComponent as DescIcon } from "../../assets/icons/sort-desc.svg";
 import { HandleLoadingState } from "../../components/shared/HandleLoadingState/HandleLoadingState";
 import GridLoader from "../../components/shared/GridLoader/GridLoader";
 import Message from "../../components/shared/Message/Message";
 
-import ReactPaginate from "react-paginate";
+import { ReactComponent as AscIcon } from "../../assets/icons/sort-asc.svg";
+
+import { ReactComponent as DescIcon } from "../../assets/icons/sort-desc.svg";
 
 import cs from "classnames";
-
 import "./Home.scss";
-import { useCountries } from "../../lib/hooks/useCountries";
-import { filterCountries } from "../../lib/helpers/filterCountries";
 
 const Home = () => {
   const {
