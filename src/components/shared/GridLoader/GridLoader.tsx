@@ -3,16 +3,17 @@ import cs from "classnames";
 import Container from "../../Container/Container";
 
 import "./GridLoader.scss";
+import CountryCardLoader from "../../CountryCard/CountryCardLoader/CountryCardLoader";
 interface Props {
   className?: string;
   length: number;
-  component: JSX.Element;
+  component?: JSX.Element;
 }
 const GridLoader = (props: Props) => {
   return (
     <div className={cs("GridLoader", props.className)}>
       {Array.from({ length: props.length }).map((item, index) => {
-        return props.component;
+        return <CountryCardLoader key={index} />;
       })}
     </div>
   );

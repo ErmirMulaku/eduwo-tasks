@@ -30,8 +30,8 @@ export interface GetCountriesResponse {
   TotalCount: number;
   Response: Array<Country>;
 }
-export const getCountries = async (data: GetCountriesInput) =>
-  apiRequest<GetCountriesInput, GetCountriesResponse>(
+export const getCountries = async () =>
+  apiRequest<undefined, GetCountriesResponse>(
     "get",
-    `v1/Country/getCountries?${objectToQueryString({ ...data })}`
+    `v1/Country/getCountries?pRegion=Europe`
   );

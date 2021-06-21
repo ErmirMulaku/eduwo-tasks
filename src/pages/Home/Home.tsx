@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { useApiCall } from "../../lib/hooks/useApiCall";
-import { Country, getCountries } from "../../api/Country";
+import React, { useEffect, useState } from "react";
+import { Country } from "../../api/Country";
 import Container from "../../components/Container/Container";
 import CountryCard from "../../components/CountryCard/CountryCard";
 import SearchInput from "../../components/shared/SearchInput/SearchInput";
@@ -9,62 +8,98 @@ import { ReactComponent as DescIcon } from "../../assets/icons/sort-desc.svg";
 import { HandleLoadingState } from "../../components/shared/HandleLoadingState/HandleLoadingState";
 import GridLoader from "../../components/shared/GridLoader/GridLoader";
 import Message from "../../components/shared/Message/Message";
-import Button from "../../components/shared/Button/Button";
+
+import ReactPaginate from "react-paginate";
 
 import cs from "classnames";
+
 import "./Home.scss";
-import CountryCardLoader from "../../components/CountryCard/CountryCardLoader/CountryCardLoader";
-import useCountries from "../../lib/hooks/useCountries";
-import { checkPageNumber } from "../../lib/helpers/checkPageNumber";
+import { useCountries } from "../../lib/hooks/useCountries";
+import { filterCountries } from "../../lib/helpers/filterCountries";
 
 const Home = () => {
-  const [isAscSortActive, setIsAscSortActive] = useState(false);
-  const [isDescSortActive, setIsDescSortActive] = useState(false);
+  const {
+    paginatedCountries,
+    setOffset,
+    filter,
+    setFilter,
+    loading,
+    setSearch,
+    error,
+    setInitialPage,
+    initialPage,
+    pageCount,
+  } = useCountries();
 
-  const { countries, loading, error, setPage, page } = useCountries();
+  const handlePageClick = (e: { selected: number }) => {
+    const selectedPage = e.selected;
+    let offset;
+    if (selectedPage == 0) {
+      offset = 0;
+      setOffset(offset);
+      return;
+    }
+    offset = selectedPage * 10;
 
-  console.log(countries, "countries");
+    setOffset(offset);
+  };
+
   return (
     <Container>
       <div className="Home">
         <div className="Home__top">
-          <SearchInput />
           <div className="Home__sort_icons">
             <AscIcon
               className={cs(
                 "Home__sort",
                 "Home__asc",
-                isAscSortActive && "Home__asc--active"
+                filter === "asc" && "Home__sort--active"
               )}
-              onClick={() => setIsAscSortActive(true)}
+              onClick={() => setFilter("asc")}
             />
-            <DescIcon className="Home__sort" />
+            <DescIcon
+              className={cs(
+                "Home__sort",
+                filter === "desc" && "Home__sort--active"
+              )}
+              onClick={() => setFilter("desc")}
+            />
           </div>
+          <SearchInput
+            filterCountriesBySearch={(search) => {
+              setSearch(search);
+              setInitialPage(0);
+            }}
+          />
         </div>
         <div className="Home__content">
           <HandleLoadingState
-            loading={checkPageNumber(page, loading)}
-            component={
-              <GridLoader length={10} component={<CountryCardLoader />} />
-            }
+            loading={loading}
+            component={<GridLoader length={10} />}
           >
-            {countries.length === 0 ? (
+            {paginatedCountries.length === 0 ? (
               <Message text="No data" type="info" />
             ) : (
               <div className="Home__cards">
-                {countries.map((country) => {
-                  return (
-                    <CountryCard key={country.CurrencyCode} country={country} />
-                  );
+                {paginatedCountries.map((country, index) => {
+                  return <CountryCard key={index} country={country} />;
                 })}
               </div>
             )}
           </HandleLoadingState>
-
-          <Button
-            label={!loading ? "Load More" : "Loading..."}
-            buttonClassName={cs("load_btn")}
-            onClick={() => setPage((prevState) => prevState + 1)}
+          <ReactPaginate
+            previousLabel={"prev"}
+            nextLabel={"next"}
+            breakLabel={"..."}
+            initialPage={initialPage}
+            pageCount={pageCount}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}
+            breakClassName={"break-me"}
+            onPageChange={(e) => handlePageClick(e)}
+            containerClassName={"pagination"}
+            pageClassName=""
+            activeClassName={"active"}
           />
         </div>
       </div>

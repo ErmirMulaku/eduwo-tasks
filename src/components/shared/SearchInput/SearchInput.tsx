@@ -4,13 +4,13 @@ import { ReactComponent as SearchLogo } from "../../../assets/icons/search.svg";
 
 import "./SearchInput.scss";
 interface SearchProps {
-  filterReviewsBySearch?: (search: string) => void;
+  filterCountriesBySearch: (search: string) => void;
 }
 const SearchInput = (props: SearchProps) => {
   const [state, setState] = useState<{ search: string }>({ search: "" });
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(e.target.value, "e.target.value");
-    /*   props.filterReviewsBySearch(e.target.value);*/
+    props.filterCountriesBySearch(e.target.value);
     setState({ search: e.target.value });
   };
   return (
