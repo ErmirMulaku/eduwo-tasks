@@ -9,7 +9,12 @@ const FlyOutMenu = (props: Props) => {
   return (
     <div className={cs("FlyOutMenu", props.isOpen && "FlyOutMenu--open")}>
       <div className="FlyOutMenu__icon"></div>
-      <div className="FlyOutMenu__content">
+      <div
+        className={cs(
+          "FlyOutMenu__content ",
+          props.isOpen && "FlyOutMenu__content--open"
+        )}
+      >
         <img
           src={Photo}
           alt="my photo"

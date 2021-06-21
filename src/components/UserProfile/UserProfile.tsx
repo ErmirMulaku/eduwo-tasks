@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import "./UserProfile.scss";
-import FlyOutMenu from "../FlyOutMenu/FlyOutMenu";
 import { useOutsideClickDetection } from "../../lib/hooks/useOutsideClickDetection";
+import FlyOutMenu from "../FlyOutMenu/FlyOutMenu";
+import "./UserProfile.scss";
 
 const UserProfile = () => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
