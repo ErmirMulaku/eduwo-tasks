@@ -1,6 +1,7 @@
 import React from "react";
 import { RouteProps, Switch, Route } from "react-router-dom";
 import Home from "../pages/Home/Home";
+import CountryDetails from "../pages/CountryDetails/CountryDetails";
 export enum RouteType {
   PUBLIC,
   PRIVATE,
@@ -15,13 +16,18 @@ export const AppRoutes: AppRoute[] = [
     exact: true,
     component: Home,
   },
+  {
+    path: "/details/:id",
+    exact: true,
+    component: CountryDetails,
+  },
 ];
 const Routes = () => {
   return (
     <Switch>
       {AppRoutes.map((route) => {
         const { path, ...rest } = route;
-        return <Route key={`${path}`} {...rest} path={`/${path}`} />;
+        return <Route key={`${path}`} {...rest} path={`${path}`} />;
       })}
     </Switch>
   );

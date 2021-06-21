@@ -2,13 +2,19 @@ import React from "react";
 import { Country } from "../../api/Country";
 import { ReactComponent as CountryCardArrow } from "../../assets/icons/right-arrow.svg";
 import "./CountryCard.scss";
+import { useRouter } from "../../lib/hooks/useRouter";
 interface Props {
   country: Country;
 }
 const CountryCard = (props: Props) => {
+  const router = useRouter();
+  console.log(router, "router");
   const country = props.country;
   return (
-    <div className="CountryCard">
+    <div
+      className="CountryCard"
+      onClick={() => router.history.push(`details/${country.Name}`)}
+    >
       <img
         width={200}
         height={120}
