@@ -12,10 +12,11 @@ const CountryCardLoader = () => {
       foregroundColor="#dedede"
       className="CountryCardLoader"
     >
-      <rect x={27} y={22} width={112} height={18} />
-      <rect x={27} y={98} width={85} height={55} />
-      <rect x={27} y={161} width={57} height={12} />
-      <rect x={27} y={211} width={64} height={12} />
+      <rect x={0} y={0} width={236} height={123} />
+      <rect x={10} y={128} width={125} height={17} />
+
+      <rect x={10} y={160} width={100} height={12} />
+      <rect x={10} y={185} width={100} height={12} />
     </ContentLoader>
   );
 };

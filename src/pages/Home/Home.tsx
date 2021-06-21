@@ -74,7 +74,7 @@ const Home = () => {
         </div>
         <div className="Home__content">
           <HandleLoadingState
-            loading={loading}
+            loading={true}
             component={<GridLoader length={10} />}
           >
             {paginatedCountries.length === 0 ? (

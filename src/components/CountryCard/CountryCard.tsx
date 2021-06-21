@@ -18,7 +18,14 @@ const CountryCard = (props: Props) => {
       />
 
       <div className="CountryCard__fade_away">
-        <div className="CountryCard__name">{country.Name}</div>
+        <div className="CountryCard__data">
+          <div className="CountryCard__name">{country.Name}</div>
+          <div className="CountryCard__region">Region: {country.Region}</div>
+          <div className="CountryCard__sub_region">
+            SubRegion: {country.SubRegion}
+          </div>
+        </div>
+
         <CountryCardArrow className="CountryCard__arrow" />
       </div>
     </div>
