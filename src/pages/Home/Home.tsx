@@ -43,7 +43,7 @@ const Home = () => {
 
     setOffset(offset);
   };
-
+  console.log(error, "error");
   return (
     <Container>
       <div className="Home">

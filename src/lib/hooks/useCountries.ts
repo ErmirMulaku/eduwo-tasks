@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { Country, getCountries } from "../../api/Country";
 import { useApiCall } from "./useApiCall";
+import { useErrorHandler } from "./useErrorHandler";
+
 import { filterCountries } from "../helpers/filterCountries";
 
 export const useCountries = () => {
@@ -15,6 +17,7 @@ export const useCountries = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(undefined);
   const [pageCount, setPageCount] = useState(0);
+  const errorHandler = useErrorHandler();
   const setPaginatedCountriesAndPageCount = (newCountries: Country[]) => {
     setPaginatedCountries(newCountries.slice(offset, offset + perPage));
     setPageCount(Math.ceil(newCountries.length / perPage));
@@ -25,7 +28,8 @@ export const useCountries = () => {
       const countries = res?.Response ?? [];
       setCountries(countries);
     } catch (e) {
-      setError(e);
+      errorHandler.handleError(e);
+      setError(errorHandler.error);
       setLoading(false);
     } finally {
       setLoading(false);
@@ -80,6 +84,10 @@ export const useCountries = () => {
     }
     setPaginatedCountriesAndPageCount(countries);
     setInitialPage(0);
+    return () => {
+      setPaginatedCountries([]);
+      setPageCount(0);
+    };
   }, [offset, search, countries, filter, setPageCount]);
 
   console.log(pageCount, "pageCount");
