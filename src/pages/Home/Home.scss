@@ -30,7 +30,6 @@
     margin-top: 25px;
     max-height: 87vh;
     overflow: auto;
-    overflow-x: hidden;
   }
   &__cards {
     display: grid;
@@ -60,6 +59,9 @@
   align-items: center;
   list-style: none;
   outline: none;
+}
+.pagination--hidden {
+  display: none;
 }
 .pagination > .active > a {
   background-color: #47ccde;

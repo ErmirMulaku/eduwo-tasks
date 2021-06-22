@@ -15,18 +15,20 @@ import { ReactComponent as AscIcon } from "../../assets/icons/sort-asc.svg";
 import { ReactComponent as DescIcon } from "../../assets/icons/sort-desc.svg";
 import cs from "classnames";
 import "./Home.scss";
+import { HandleErrorState } from "../../components/ErrorHandlerState/ErrorHandlerState";
 
 const Home = () => {
   const width = useWindowWidth();
   const {
-    paginatedCountries,
     setOffset,
-    filter,
     setFilter,
-    loading,
     setSearch,
-    error,
     setInitialPage,
+    paginatedCountries,
+    filter,
+    loading,
+    search,
+    error,
     initialPage,
     pageCount,
   } = useCountries();
@@ -43,7 +45,7 @@ const Home = () => {
 
     setOffset(offset);
   };
-  console.log(error, "error");
+
   return (
     <Container>
       <div className="Home">
@@ -77,16 +79,19 @@ const Home = () => {
             loading={loading}
             component={<GridLoader length={10} />}
           >
-            {paginatedCountries.length === 0 ? (
-              <Message text="No data" type="info" />
-            ) : (
-              <div className="Home__cards">
-                {paginatedCountries.map((country, index) => {
-                  return <CountryCard key={index} country={country} />;
-                })}
-              </div>
-            )}
+            <HandleErrorState error={error}>
+              {paginatedCountries.length === 0 ? (
+                <Message text="No data" type="info" />
+              ) : (
+                <div className="Home__cards">
+                  {paginatedCountries.map((country, index) => {
+                    return <CountryCard key={index} country={country} />;
+                  })}
+                </div>
+              )}
+            </HandleErrorState>
           </HandleLoadingState>
+
           <ReactPaginate
             previousLabel={"prev"}
             nextLabel={"next"}
@@ -98,7 +103,7 @@ const Home = () => {
             marginPagesDisplayed={width < 768 ? 1 : 2}
             breakClassName={"break-me"}
             onPageChange={(e) => handlePageClick(e)}
-            containerClassName={"pagination"}
+            containerClassName={cs("pagination", error && "pagination--hidden")}
             pageClassName=""
             activeClassName={"active"}
           />

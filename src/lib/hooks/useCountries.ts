@@ -29,7 +29,9 @@ export const useCountries = () => {
       setCountries(countries);
     } catch (e) {
       errorHandler.handleError(e);
+      console.log(errorHandler.error, "errorHandler.error");
       setError(errorHandler.error);
+
       setLoading(false);
     } finally {
       setLoading(false);
@@ -38,7 +40,9 @@ export const useCountries = () => {
 
   useEffect(() => {
     getData();
-    return () => setCountries([]);
+    return () => {
+      setCountries([]);
+    };
   }, []);
   useEffect(() => {
     if (!filter && search) {
@@ -89,9 +93,11 @@ export const useCountries = () => {
       setPageCount(0);
     };
   }, [offset, search, countries, filter, setPageCount]);
-
-  console.log(pageCount, "pageCount");
-
+  useEffect(() => {
+    setError(errorHandler.error);
+    return () => setError(undefined);
+  }, [errorHandler.error]);
+  console.log(search, "search");
   return {
     offset: offset,
     filter,
