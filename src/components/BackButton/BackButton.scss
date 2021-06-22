@@ -1,0 +1,17 @@
+@import "src/styles/variables";
+
+.BackButton {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  font-weight: 200;
+
+  &__text {
+    font-weight: lighter;
+  }
+  &__icon {
+    fill: white;
+    margin-right: 10px;
+  }
+}
