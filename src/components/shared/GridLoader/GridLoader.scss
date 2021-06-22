@@ -5,11 +5,18 @@
   grid-auto-rows: auto;
   column-gap: 20px;
   row-gap: 18px;
+
   @include large-desktop {
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: auto;
   }
   @include desktop {
     grid-template-columns: repeat(3, 1fr);
+  }
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include mobile-landscape {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

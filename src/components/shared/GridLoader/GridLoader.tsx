@@ -1,6 +1,5 @@
 import React from "react";
 import cs from "classnames";
-import Container from "../../Container/Container";
 
 import "./GridLoader.scss";
 import CountryCardLoader from "../../CountryCard/CountryCardLoader/CountryCardLoader";
