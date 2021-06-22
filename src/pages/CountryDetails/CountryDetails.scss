@@ -3,12 +3,12 @@
 .CountryDetails {
   height: 100vh;
   background-color: white;
-  padding: 20px 40px;
+  padding: 20px 40px 0 40px;
   &__top {
     /*    margin: 20px 40px;*/
   }
   &__content {
-    margin-top: 20px;
+    margin-top: 60px;
     display: flex;
     @include tablet {
       flex-direction: column;

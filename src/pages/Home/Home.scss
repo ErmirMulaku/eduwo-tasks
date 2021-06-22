@@ -4,6 +4,7 @@
   height: 100vh;
   background-color: white;
   padding: 33.65px 67px;
+
   &__top {
     display: flex;
     justify-content: space-between;
@@ -70,6 +71,9 @@
   padding: 5px 10px;
   outline: none;
   cursor: pointer;
+  @include mobile-landscape {
+    padding: 5px 5px !important;
+  }
 }
 .pagination > .active > a,
 .pagination > .active > span,

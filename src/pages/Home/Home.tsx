@@ -1,21 +1,23 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
+import { useWindowWidth } from "../../lib/hooks/useWindowWidth";
 import { useCountries } from "../../lib/hooks/useCountries";
 import Container from "../../components/Container/Container";
 import CountryCard from "../../components/CountryCard/CountryCard";
 import SearchInput from "../../components/shared/SearchInput/SearchInput";
 import { HandleLoadingState } from "../../components/shared/HandleLoadingState/HandleLoadingState";
 import GridLoader from "../../components/shared/GridLoader/GridLoader";
+
 import Message from "../../components/shared/Message/Message";
 
 import { ReactComponent as AscIcon } from "../../assets/icons/sort-asc.svg";
 
 import { ReactComponent as DescIcon } from "../../assets/icons/sort-desc.svg";
-
 import cs from "classnames";
 import "./Home.scss";
 
 const Home = () => {
+  const width = useWindowWidth();
   const {
     paginatedCountries,
     setOffset,
@@ -89,10 +91,11 @@ const Home = () => {
             previousLabel={"prev"}
             nextLabel={"next"}
             breakLabel={"..."}
+            breakLinkClassName={""}
             initialPage={initialPage}
             pageCount={pageCount}
-            pageRangeDisplayed={5}
-            marginPagesDisplayed={2}
+            pageRangeDisplayed={width < 768 ? 1 : 5}
+            marginPagesDisplayed={width < 768 ? 1 : 2}
             breakClassName={"break-me"}
             onPageChange={(e) => handlePageClick(e)}
             containerClassName={"pagination"}
