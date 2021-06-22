@@ -87,12 +87,13 @@ export const useCountries = () => {
       return;
     }
     setPaginatedCountriesAndPageCount(countries);
-    setInitialPage(0);
+    /*    setInitialPage(0);*/
     return () => {
       setPaginatedCountries([]);
       setPageCount(0);
     };
   }, [offset, search, countries, filter, setPageCount]);
+
   useEffect(() => {
     setError(errorHandler.error);
     return () => setError(undefined);

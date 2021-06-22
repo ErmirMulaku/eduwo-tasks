@@ -76,7 +76,7 @@ const Home = () => {
         </div>
         <div className="Home__content">
           <HandleLoadingState
-            loading={true}
+            loading={loading}
             component={<GridLoader length={10} />}
           >
             <HandleErrorState error={error}>

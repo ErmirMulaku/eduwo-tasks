@@ -24,7 +24,10 @@ const CountryDetails = (props: RouteComponentProps<Props>) => {
         <BackButton />
       </div>
       <div className="CountryDetails__content">
-        <HandleLoadingState loading={true} component={<CountryDetailsLoader />}>
+        <HandleLoadingState
+          loading={loading}
+          component={<CountryDetailsLoader />}
+        >
           <img
             width={600}
             height={400}
