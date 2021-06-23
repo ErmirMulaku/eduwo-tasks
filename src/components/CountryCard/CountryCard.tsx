@@ -8,7 +8,6 @@ interface Props {
 }
 const CountryCard = (props: Props) => {
   const router = useRouter();
-  console.log(router, "router");
   const country = props.country;
   return (
     <div

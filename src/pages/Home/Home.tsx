@@ -23,29 +23,29 @@ const Home = () => {
     setOffset,
     setFilter,
     setSearch,
-    setInitialPage,
     paginatedCountries,
     filter,
     loading,
     search,
     error,
-    initialPage,
+    selectedPage,
+    setSelectedPage,
     pageCount,
   } = useCountries();
 
   const handlePageClick = (e: { selected: number }) => {
     const selectedPage = e.selected;
     let offset;
-    if (selectedPage == 0) {
+    if (selectedPage === 0) {
       offset = 0;
       setOffset(offset);
       return;
     }
-    offset = selectedPage * 10;
 
+    offset = selectedPage * 10;
+    setSelectedPage(selectedPage);
     setOffset(offset);
   };
-
   return (
     <Container>
       <div className="Home">
@@ -64,13 +64,14 @@ const Home = () => {
                 "Home__sort",
                 filter === "desc" && "Home__sort--active"
               )}
-              onClick={() => setFilter("desc")}
+              onClick={() => {
+                setFilter("desc");
+              }}
             />
           </div>
           <SearchInput
             filterCountriesBySearch={(search) => {
               setSearch(search);
-              setInitialPage(0);
             }}
           />
         </div>
@@ -97,8 +98,8 @@ const Home = () => {
             nextLabel={"next"}
             breakLabel={"..."}
             breakLinkClassName={""}
-            initialPage={initialPage}
             pageCount={pageCount}
+            initialPage={selectedPage}
             pageRangeDisplayed={width < 768 ? 1 : 5}
             marginPagesDisplayed={width < 768 ? 1 : 2}
             breakClassName={"break-me"}

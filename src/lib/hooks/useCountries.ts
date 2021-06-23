@@ -7,12 +7,13 @@ import { filterCountries } from "../helpers/filterCountries";
 
 export const useCountries = () => {
   const [offset, setOffset] = useState(0);
-  const [initialPage, setInitialPage] = useState(0);
+  const [selectedPage, setSelectedPage] = useState(0);
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("");
 
   const [perPage] = useState(10);
   const [countries, setCountries] = useState([] as Country[]);
+
   const [paginatedCountries, setPaginatedCountries] = useState([] as Country[]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(undefined);
@@ -45,34 +46,39 @@ export const useCountries = () => {
     };
   }, []);
   useEffect(() => {
+    let newCountries;
+    let offset1;
     if (!filter && search) {
-      let newCountries = countries.filter((country) => {
+      newCountries = countries.filter((country) => {
         return country.Name.toLowerCase().includes(search.toLowerCase());
       });
+      setOffset(0);
+      setSelectedPage(0);
+
       setPaginatedCountriesAndPageCount(newCountries);
       return;
     }
     if (filter && !search) {
-      let newCountries;
       if (filter === "asc") {
         newCountries = countries.sort((a, b) => (a.Name > b.Name ? 1 : -1));
         setPaginatedCountriesAndPageCount(newCountries);
         return;
       }
       newCountries = countries.sort((a, b) => (a.Name > b.Name ? -1 : 1));
+
       setPaginatedCountriesAndPageCount(newCountries);
 
       return;
     }
 
     if (filter && search) {
-      let newCountries;
       if (filter === "asc") {
         newCountries = filterCountries(
           countries,
           "sortA-ZAndFilterBySearch",
           search
         );
+        setOffset(0);
         setPaginatedCountriesAndPageCount(newCountries);
 
         return;
@@ -82,23 +88,26 @@ export const useCountries = () => {
         "sortZ-AAndFilterBySearch",
         search
       );
+      setOffset(0);
       setPaginatedCountriesAndPageCount(newCountries);
 
       return;
     }
+
     setPaginatedCountriesAndPageCount(countries);
-    /*    setInitialPage(0);*/
-    return () => {
+
+    /*    return () => {
       setPaginatedCountries([]);
-      setPageCount(0);
-    };
-  }, [offset, search, countries, filter, setPageCount]);
+    };*/
+  }, [offset, search, pageCount, countries, filter]);
 
   useEffect(() => {
     setError(errorHandler.error);
     return () => setError(undefined);
   }, [errorHandler.error]);
-  console.log(search, "search");
+
+  console.log(selectedPage, "selectedPage");
+  console.log(offset, "offset");
   return {
     offset: offset,
     filter,
@@ -113,7 +122,7 @@ export const useCountries = () => {
     error,
     pageCount,
     perPage,
-    setInitialPage,
-    initialPage,
+    selectedPage,
+    setSelectedPage,
   };
 };
